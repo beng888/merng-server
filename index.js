@@ -7,7 +7,7 @@ const { MONGODB } = require("./config");
 
 const pubsub = new PubSub();
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 const server = new ApolloServer({
   typeDefs,
@@ -28,10 +28,10 @@ mongoose
   })
   .then((res) => {
     console.log(`server running at ${res.url}`);
-  });
-  .catch(err => {
-    console.error(err)
   })
+  .catch((err) => {
+    console.error(err);
+  });
 
 // TODO Email integration (forgot password, confirm account)
 // TODO Profile View (user's can click on each others profiles and maybe "follow" them)
