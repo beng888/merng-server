@@ -27,15 +27,20 @@ module.exports = {
     },
   },
   Mutation: {
-    async createPost(_, { body }, context) {
+    async createPost(_, { title, body, url }, context) {
       const user = checkAuth(context);
-
-      if (body.trim() === "") {
-        throw new Error("Post body must not be empty");
+      if (title.trim() === "" && body.trim() === "") {
+        throw new Error("Post title & description must not be empty");
+      } else if (title.trim() === "") {
+        throw new Error("Post title must not be empty");
+      } else if (body.trim() === "") {
+        throw new Error("Post description must not be empty");
       }
 
       const newPost = new Post({
+        title,
         body,
+        url,
         user: user.id,
         username: user.username,
         createdAt: new Date().toISOString(),
